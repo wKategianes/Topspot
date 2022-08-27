@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by William Kategianes</title>
+    <title>Top Spot: A Coding Project by William Kategianes</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
 <!-- ===== Nav Section ===== -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="img/BrandIconLogo.png" class="d-inline-block align-text-top" width="30" height="30" > App Name</a>
+        <a class="navbar-brand" href="#"><img src="img/BrandIconLogo.png" class="d-inline-block align-text-top" width="30" height="30" > Top Spot</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -53,23 +53,89 @@
 <!-- ===== Main Section ===== -->
 <main class="flex-shrink-0">
     <div class="container py-4 px-5 mt-5">
-        <h2 class="border-1 border-bottom border-dark">The Code for App Name</h2>
+        <h2 class="border-1 border-bottom border-dark">The Code for Top Spot</h2>
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-javascript">
-                        //Call Hello World
-                        function helloWorld(){
-                            alert("Hello World");
+                        //get our user input
+                        function getValue(){
+                        
+                            //making sure the alert is not visible
+                            document.getElementById("alert").classList.add("invisible");
+                        
+                            //get user string from the page
+                            let userString = document.getElementById("userString").value;
+                        
+                            //check for a palindrome
+                            let returnObj = checkForPalindrome(userString);
+                        
+                            //display our message to the screen
+                            displayMessage(returnObj);
+                        
+                        }
+                        
+                        //check if string is a palindrome
+                        function checkForPalindrome(userString){
+                        
+                            userString = userString.toLowerCase();
+                        
+                            //remove spaces and special characters
+                            let regex = /[^a-z0-9]/gi;
+                            userString = userString.replace(regex, "");
+                        
+                            let revString = [];
+                            let returnObj = {};
+                        
+                            //reverse the string
+                            for (let index = userString.length - 1; index >= 0; index--) {
+                                revString += userString[index];        
+                            }
+                        
+                            //checking the string for a palindrome
+                            if (revString == userString) {
+                                returnObj.msg = "Well Done! You entered a palindrome!"        
+                            } else {
+                                returnObj.msg = "Sorry! You did not enter a palindrome!"
+                            }
+                        
+                            returnObj.reversed = revString;
+                        
+                            return returnObj;
+                        }
+                        
+                        // display a message to the string
+                        function displayMessage(returnObj){
+                        
+                            document.getElementById("alertHeader").innerHTML = returnObj.msg;
+                            document.getElementById("msg").innerHTML = `Your phrase reversed is: ${returnObj.reversed}`;
+                            document.getElementById("alert").classList.remove("invisible");
                         }
                     </code>                        
                 </pre>
             </div>
 
             <div class="col-lg-4">
-                <p>The Code is structered in one function.</p>
-                <h5>Hello World</h5>
-                <p>Hello World is a function is a function that displays an alert with a message of "Hello World".</p>
+                <p>The Code is structered a combination of three functions that work with data processed or gathered by eachother.</p>
+                <h5>getValue()</h5>
+                <p>Inside this function dictates what the program does later but first off it sets the alert to invisible. We declare a variable and
+                    assign it a value that is taken from the page. Next we go ahead and declare another variable while calling the function checkForPalindrome().
+                    Eventually after checkForPalindrome() returns the data it is then passed into the displayMessage() function.
+                </p>
+
+                <h5>checkForPalindrome()</h5>
+                <p>This function is responsible for all the logic and ensuring that the user gets their desired output. It accepts a parameter which in this case is a 
+                    string. The string is immediately has all of its characters set to lowercase with the .toLowerCase() method. The next thing that happens is the use
+                    of regex to remove the spaces and special characters that might be in the string. At this point we declare an object and an empty array to be used later.
+                    We reverse the string using a for loop and we check the string to see if it is a palindrome using an if statement that compares both strings. Once that is 
+                    done we then return the data.
+                </p>
+                
+                <h5>displayMessage()</h5>
+                <p>Out of the entire program this is the most simple function out of them all. This function accepts an object and uses it to display the message to the user.
+                    It starts off by returning the message that is contained within the object within the "alertHeader". Next it displays to the user their string but reversed.
+                    Lastly in order to show all of this data to the user we simply remove the "invisible" class from the alert to display everything on the page.
+                </p>
             </div>
         </div>
 
